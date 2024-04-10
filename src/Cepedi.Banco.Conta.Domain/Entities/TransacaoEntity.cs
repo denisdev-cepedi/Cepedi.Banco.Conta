@@ -3,9 +3,9 @@ public class TransacaoEntity
 {
     public int Id { get; set; }
     public int IdContaOrigem { get; set; }
-    //public Conta ContaOrigem { get; set; }
+    public required ContaEntity ContaOrigem { get; set; }
     public int IdContaDestino { get; set; }
-    //public Conta ContaDestino { get; set; }
+    public required ContaEntity ContaDestino { get; set; }
 
     public DateTime DataTransacao { get; set; }
 
