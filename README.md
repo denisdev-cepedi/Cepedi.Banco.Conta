@@ -1,6 +1,6 @@
 # Cepedi.CleanArch
 
-Executar o projeto `src\Cepedi.Banco.Conta.WebApi` para abrir o swagger
+Executar o projeto `src\Cepedi.Banco.Conta.Api` para abrir o swagger
 
 ## Características do projeto
 

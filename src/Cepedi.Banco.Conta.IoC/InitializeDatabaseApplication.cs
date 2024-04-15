@@ -1,5 +1,8 @@
-﻿using Cepedi.Banco.Conta.Data;
-using Cepedi.Banco.Conta.Domain.Entities;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+using Cepedi.Banco.Conta.Dados;
+using Cepedi.Banco.Conta.Dominio.Entidades;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 

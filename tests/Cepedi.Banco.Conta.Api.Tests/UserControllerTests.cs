@@ -1,13 +1,13 @@
-﻿using Cepedi.Banco.Conta.WebApi.Controllers;
-using Cepedi.Shareable.Requests;
-using Cepedi.Shareable.Responses;
+﻿using Cepedi.Banco.Conta.Api.Controllers;
+using Cepedi.Banco.Conta.Compartilhado.Requests;
+using Cepedi.Banco.Conta.Compartilhado.Responses;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Moq;
 using NSubstitute;
 using OperationResult;
 
-namespace Cepedi.Banco.Conta.WebApi.Tests
+namespace Cepedi.Banco.Conta.Api.Tests
 {
     public class UserControllerTests
     {
