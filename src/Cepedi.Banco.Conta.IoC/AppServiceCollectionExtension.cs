@@ -1,10 +1,8 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
-using Cepedi.Banco.Conta.Data;
-using Cepedi.Banco.Conta.Data.Repositories;
-using Cepedi.Banco.Conta.Domain;
-using Cepedi.Banco.Conta.Domain.Repository;
-using MediatR;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
+using Cepedi.Banco.Conta.Dados;
+using Cepedi.Banco.Conta.Dados.Repositorios;
+using Cepedi.Banco.Conta.Dominio.Repositorio;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
