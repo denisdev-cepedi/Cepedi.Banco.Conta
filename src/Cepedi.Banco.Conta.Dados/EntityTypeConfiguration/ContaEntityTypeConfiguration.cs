@@ -15,14 +15,6 @@ public class ContaEntityTypeConfiguration : IEntityTypeConfiguration<ContaEntity
         builder.Property(c => c.IdPessoa).IsRequired();
         builder.Property(c => c.Saldo).IsRequired();
 
-/*         builder.HasMany(c => c.TransacoesEnviadas)
-            .WithOne(c => c.ContaOrigem)
-            .HasForeignKey(t => t.Id);
-
-        builder.HasMany(c => c.TransacoesRecebidas)
-            .WithOne(c => c.ContaDestino)
-            .HasForeignKey(t => t.Id); */
-
         builder.HasMany(c => c.ChavesPix)
             .WithOne(c => c.Conta)
             .HasForeignKey(t => t.IdConta)
