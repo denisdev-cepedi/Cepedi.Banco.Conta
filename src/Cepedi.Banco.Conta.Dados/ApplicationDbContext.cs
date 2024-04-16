@@ -8,7 +8,11 @@ namespace Cepedi.Banco.Conta.Dados;
 public class ApplicationDbContext : DbContext
 {
     public DbSet<UsuarioEntity> Usuario { get; set; } = default!;
-
+    public DbSet<ContaEntity> Conta { get; set; } = default!;
+    public DbSet<TransacaoEntity> Transacao { get; set; } = default!;
+    public DbSet<ChavePixEntity> ChavePix { get; set; } = default!;
+    public DbSet<TipoTransacaoEntity> TipoTransacao { get; set; } = default!;
+    public DbSet<TipoChavePixEntity> TipoChavePixTransacao { get; set; } = default!;
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
     {

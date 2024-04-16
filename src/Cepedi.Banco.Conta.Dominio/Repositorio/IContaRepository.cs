@@ -1,10 +1,12 @@
 using Cepedi.Banco.Conta.Dominio.Entidades;
+using System.Threading.Tasks;
 
-namespace Cepedi.Banco.Conta.Dominio.Repositorio;
-
-public interface IContaRepository
+namespace Cepedi.Banco.Conta.Dominio.Repositorio
 {
-    Task<ContaEntity> CriarContaAsync(ContaEntity Conta);
-    Task<ContaEntity> ObterContaAsync(int id);
-    Task<ContaEntity> AtualizarContaAsync(ContaEntity Conta);
+    public interface IChavePixRepository
+    {
+        Task<ChavePixEntity> CriarChavePixAsync(ChavePixEntity chavePix);
+        Task<ChavePixEntity> ObterChavePixAsync(int id);
+        Task<ChavePixEntity> AtualizarChavePixAsync(ChavePixEntity chavePix);
+    }
 }
