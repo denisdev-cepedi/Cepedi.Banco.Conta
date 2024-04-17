@@ -1,23 +1,39 @@
 using Cepedi.Banco.Conta.Dominio.Entidades;
 using Cepedi.Banco.Conta.Dominio.Repositorio;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Cepedi.Banco.Conta.Data.Repositories;
-public class ContaRepository : IContaRepository
+namespace Cepedi.Banco.Conta.Dados.Repositorios
 {
-    public Task<ContaEntity> CriarContaAsync(ContaEntity Conta)
+    public class ContaRepository : IContaRepository
     {
-        throw new NotImplementedException();
-    }
-    
-    public Task<ContaEntity> AtualizarContaAsync(ContaEntity Conta)
-    {
-        throw new NotImplementedException();
-    }
+        private readonly ApplicationDbContext _context;
 
+        public ContaRepository(ApplicationDbContext context)
+        {
+            _context = context;
+        }
 
-    public Task<ContaEntity> ObterContaAsync(int id)
-    {
-        throw new NotImplementedException();
+        public async Task<ContaEntity> CriarContaAsync(ContaEntity conta)
+        {
+            _context.Conta.Add(conta);
+            await _context.SaveChangesAsync();
+            return conta;
+        }
+
+        public async Task<ContaEntity> AtualizarContaAsync(ContaEntity conta)
+        {
+            _context.Conta.Update(conta);
+            await _context.SaveChangesAsync();
+            return conta;
+        }
+
+        public async Task<ContaEntity> ObterContaAsync(int id)
+        {
+            return await _context.Conta.FirstOrDefaultAsync(c => c.Id == id);
+        }
     }
 }
-
