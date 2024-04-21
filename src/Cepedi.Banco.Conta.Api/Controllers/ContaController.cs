@@ -30,6 +30,13 @@ public class ContaController : BaseController
     // public async Task<ActionResult<CriarContaResponse>> CriarContaAsync(
     //     [FromBody] CriarContaRequest request) => await SendCommand(request);
 
+
+    [HttpGet]
+    [ProducesResponseType(typeof(BuscarContaResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ContaMensagemErrors), StatusCodes.Status400BadRequest)] //Talvez adicionar um responsetype para 404 seja válido
+    public async Task<ActionResult<BuscarContaResponse>> ObterContaAsync(
+        [FromBody] BuscarContaRequest request) => await SendCommand(request);
+
     // [HttpPut]
     // [ProducesResponseType(typeof(AtualizarContaResponse), StatusCodes.Status200OK)]
     // [ProducesResponseType(typeof(ResponseErro), StatusCodes.Status400BadRequest)]
