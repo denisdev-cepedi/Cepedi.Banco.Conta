@@ -24,32 +24,27 @@ namespace Cepedi.Banco.Conta.Dominio.Handlers;
 
     public async Task<Result<CriarTransacaoResponse>> Handle(CriarTransacaoRequest request, CancellationToken cancellationToken)
     {
-        try
-        {
-            var contaOrigem = await _contaRepository.ObterContaAsync(request.IdContaOrigem);
-            var contaDestino = await _contaRepository.ObterContaAsync(request.IdContaDestino);
- 
-            if(contaOrigem == null || contaDestino == null){
-                throw new Exception("erro");
-            } 
-            var transacao = new TransacaoEntity()
-            {
-                IdContaOrigem = request.IdContaOrigem,
-                IdContaDestino = request.IdContaDestino,
-                IdTipoTransacao = request.IdTipoTransacao,
-                DataTransacao = request.DataTransacao,
-                ValorTransacao = request.ValorTransacao
-            };
 
-            await _transacaoRepository.CriarTransacaoAsync(transacao);
+        var contaOrigem = await _contaRepository.ObterContaAsync(request.IdContaOrigem);
+        var contaDestino = await _contaRepository.ObterContaAsync(request.IdContaDestino);
 
-            return Result.Success(new CriarTransacaoResponse(transacao.Id, transacao.DataTransacao.ToString(), transacao.ValorTransacao ));
-        }
-        catch
-        {
-            _logger.LogError("Ocorreu um erro durante a execução");
+        if(contaOrigem == null || contaDestino == null){
             return Result.Error<CriarTransacaoResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
-                (ContaMensagemErrors.ErroGravacaoUsuario)));
-        }
+            (ContaMensagemErrors.DadosInvalidos)));
+        } 
+        var transacao = new TransacaoEntity()
+        {
+            IdContaOrigem = request.IdContaOrigem,
+            IdContaDestino = request.IdContaDestino,
+            IdTipoTransacao = request.IdTipoTransacao,
+            DataTransacao = request.DataTransacao,
+            ValorTransacao = request.ValorTransacao
+        };
+
+        await _transacaoRepository.CriarTransacaoAsync(transacao);
+
+        return Result.Success(new CriarTransacaoResponse(transacao.Id, transacao.DataTransacao.ToString(), transacao.ValorTransacao ));
     }
+
+    
 }
