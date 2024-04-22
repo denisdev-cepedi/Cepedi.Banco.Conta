@@ -10,6 +10,7 @@ public class ChavePixEntityTypeConfiguration : IEntityTypeConfiguration<ChavePix
     {
         builder.ToTable("ChavePix");
         builder.HasKey(c => c.Id);
+        builder.Property(c => c.Nome).IsRequired();
 
         builder.HasOne(c => c.TipoChavePix)
             .WithMany(c => c.ChavePixes)

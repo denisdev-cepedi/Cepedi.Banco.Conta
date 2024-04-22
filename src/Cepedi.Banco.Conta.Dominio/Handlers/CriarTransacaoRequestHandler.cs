@@ -45,6 +45,4 @@ namespace Cepedi.Banco.Conta.Dominio.Handlers;
 
         return Result.Success(new CriarTransacaoResponse(transacao.Id, transacao.DataTransacao.ToString(), transacao.ValorTransacao ));
     }
-
-    
 }

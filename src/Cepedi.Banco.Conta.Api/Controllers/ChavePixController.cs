@@ -20,11 +20,11 @@ public class ChavePixController : BaseController
     }
 
 
-    // [HttpPost]
-    // [ProducesResponseType(typeof(CriarChavePixResponse), StatusCodes.Status200OK)]
-    // [ProducesResponseType(typeof(ResponseErro), StatusCodes.Status400BadRequest)]
-    // public async Task<ActionResult<CriarChavePixResponse>> CriarChavePixAsync(
-    //     [FromBody] CriarChavePixRequest request) => await SendCommand(request);
+    [HttpPost]
+    [ProducesResponseType(typeof(CriarChavePixResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResponseErro), StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<CriarChavePixResponse>> CriarChavePixAsync(
+        [FromBody] CriarChavePixRequest request) => await SendCommand(request);
 
     // [HttpPut]
     // [ProducesResponseType(typeof(AtualizarChavePixResponse), StatusCodes.Status200OK)]
