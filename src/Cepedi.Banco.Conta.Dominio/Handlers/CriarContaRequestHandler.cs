@@ -27,12 +27,14 @@ public class CriarContaRequestHandler : IRequestHandler<CriarContaRequest, Resul
                 IdPessoa = request.IdPessoa,
                 Agencia = request.Agencia,
                 Numero = request.Numero,
-                Saldo = request.Saldo
+                Status = request.Status,
+                LimiteTrasancao = request.LimiteTrasancao,
+                LimiteCredito = request.LimiteCredito
             };
 
             _contaRepository.CriarContaAsync(conta);
 
-            return Result.Success(new CriarContaResponse(conta.IdConta, conta.Agencia, conta.Numero));
+            return Result.Success(new CriarContaResponse(conta.Id, conta.Agencia, conta.Numero));
         }
         catch
         {
