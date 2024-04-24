@@ -17,10 +17,10 @@ public class ContaMensagemErrors
         Tipo = ETipoErro.Alerta
     };
 
-    public static ResultadoErro ErroGravacaoUsuario = new()
+    public static ResultadoErro ErroGravacaoConta = new()
     {
         Titulo = "Ocorreu um erro na gravação",
-        Descricao = "Ocorreu um erro na gravação do usuário. Por favor tente novamente",
+        Descricao = "Ocorreu um erro na gravação da conta. Por favor tente novamente",
         Tipo = ETipoErro.Erro
     };
 
