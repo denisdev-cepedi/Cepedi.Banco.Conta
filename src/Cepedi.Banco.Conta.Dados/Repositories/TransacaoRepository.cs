@@ -1,4 +1,5 @@
-﻿using Cepedi.Banco.Conta.Dominio.Entidades;
+﻿using Cepedi.Banco.Conta.Compartilhado.Responses;
+using Cepedi.Banco.Conta.Dominio.Entidades;
 using Cepedi.Banco.Conta.Dominio.Repositorio;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -34,6 +35,16 @@ namespace Cepedi.Banco.Conta.Dados.Repositorios
         public async Task<TransacaoEntity> ObterTransacaoAsync(int id)
         {
             return await _context.Transacao.FirstOrDefaultAsync(c => c.Id == id);
+        }
+
+        public Task<List<TransacaoEntity>> ObterTransacoesPorContaAsync(int idConta, DateTime dataInicio, DateTime dataFim)
+        {            
+            var transacoes = _context.Transacao
+                .Where(t => t.IdContaOrigem == idConta || t.IdContaDestino == idConta)
+                .Where(t => t.DataTransacao >= dataInicio && t.DataTransacao <= dataFim)
+                .ToListAsync();
+
+            return transacoes;
         }
     }
 }

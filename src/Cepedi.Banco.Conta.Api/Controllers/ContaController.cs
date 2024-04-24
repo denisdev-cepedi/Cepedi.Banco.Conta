@@ -5,6 +5,7 @@ using Cepedi.Banco.Conta.Compartilhado.Requests;
 using Cepedi.Banco.Conta.Compartilhado.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Cepedi.Banco.Conta.Compartilhado.Enums;
 
 namespace Cepedi.Banco.Conta.Api.Controllers;
 
@@ -22,6 +23,12 @@ public class ContaController : BaseController
         _logger = logger;
         _mediator = mediator;
     }
+
+    [HttpGet("{id_conta}/extrato")]
+    [ProducesResponseType(typeof(ExtratoContaResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ContaMensagemErrors), StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<ExtratoContaResponse>> ExtratoContaAsync(
+         [FromBody] ExtratoContaRequest request) => await SendCommand(request);
 
 
     // [HttpPost]
