@@ -1,4 +1,7 @@
 using Cepedi.Banco.Conta.Api.Controllers;
+using Cepedi.Banco.Conta.Compartilhado.Enums;
+using Cepedi.Banco.Conta.Compartilhado.Requests;
+using Cepedi.Banco.Conta.Compartilhado.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,15 +25,15 @@ public class ChavePixController : BaseController
 
     [HttpPost]
     [ProducesResponseType(typeof(CriarChavePixResponse), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(ResponseErro), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ContaMensagemErrors), StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<CriarChavePixResponse>> CriarChavePixAsync(
         [FromBody] CriarChavePixRequest request) => await SendCommand(request);
 
-    // [HttpPut]
-    // [ProducesResponseType(typeof(AtualizarChavePixResponse), StatusCodes.Status200OK)]
-    // [ProducesResponseType(typeof(ResponseErro), StatusCodes.Status400BadRequest)]
-    // [ProducesResponseType(typeof(ResponseErro), StatusCodes.Status204NoContent)]
-    // public async Task<ActionResult<AtualizarChavePixResponse>> AtualizarChavePixAsync(
-    //     [FromBody] AtualizarChavePixRequest request) => await SendCommand(request);
+    [HttpPut]
+    [ProducesResponseType(typeof(AtualizarChavePixResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ContaMensagemErrors), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ContaMensagemErrors), StatusCodes.Status204NoContent)]
+    public async Task<ActionResult<AtualizarChavePixResponse>> AtualizarChavePixAsync(
+        [FromBody] AtualizarChavePixRequest request) => await SendCommand(request);
 
 }
