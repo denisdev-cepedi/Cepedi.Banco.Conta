@@ -10,8 +10,7 @@ public class TipoChavePixEntityTypeConfiguration : IEntityTypeConfiguration<Tipo
     {
         builder.ToTable("TipoChavePix");
         builder.HasKey(c => c.Id);
-
-        builder.Property(c => c.Nome).IsRequired();
             
+        builder.Property(c => c.Nome).IsRequired();
     }
 }

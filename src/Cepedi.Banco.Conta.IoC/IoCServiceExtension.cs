@@ -23,6 +23,9 @@ namespace Cepedi.Banco.Conta.IoC
 
             ConfigurarFluentValidation(services);
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            services.AddScoped<IContaRepository, ContaRepository>();
+            services.AddScoped<ITransacaoRepository, TransacaoRepository>();
+            services.AddScoped<IChavePixRepository, ChavePixRepository>();
             //services.AddHttpContextAccessor();
 
             services.AddHealthChecks()
