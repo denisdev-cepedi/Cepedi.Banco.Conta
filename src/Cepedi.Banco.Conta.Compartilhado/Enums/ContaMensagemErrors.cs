@@ -30,4 +30,11 @@ public class ContaMensagemErrors
         Descricao = "Os dados enviados na requisição são inválidos",
         Tipo = ETipoErro.Erro
     };
+
+    public static ResultadoErro ErroGravacaoUsuario = new()
+    {
+        Titulo = "Ocorreu um erro na gravação",
+        Descricao = "Ocorreu um erro na gravação do usuario. Por favor tente novamente",
+        Tipo = ETipoErro.Erro
+    };
 }

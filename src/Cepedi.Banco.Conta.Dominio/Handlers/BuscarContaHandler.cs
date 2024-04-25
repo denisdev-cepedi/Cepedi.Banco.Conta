@@ -18,25 +18,16 @@ public class BuscarContaRequestHandler : IRequestHandler<BuscarContaRequest, Res
         _contaRepository = contaRepository;
         _logger = logger;
     }
-    public Task<Result<BuscarContaResponse>> Handle(BuscarContaRequest request, CancellationToken cancellationToken)
+    public async Task<Result<BuscarContaResponse>> Handle(BuscarContaRequest request, CancellationToken cancellationToken)
     {
-        try
-        {
-            var contaEntity = await _contaRepository.ObterContaAsync(request.Id);
+        var contaEntity = await _contaRepository.ObterContaAsync(request.IdPessoa);
 
-            if (contaEntity == null)
-            {
-                return Result.Error<BuscarContaResponse>(new
-                    Compartilhado.Excecoes.SemResultadosExcecao());
-            }
-
-            return Result.Success(new BuscarContaResponse(conta.IdConta, conta.Agencia, conta.Numero));
-        }
-        catch
+        if (contaEntity == null)
         {
-            _logger.LogError("Ocorreu um erro durante a execução");
-            return Result.Error<BuscarContaResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
-                (ContaMensagemErrors.SemResultados)));
+            return Result.Error<BuscarContaResponse>(new
+                Compartilhado.Excecoes.SemResultadosExcecao());
         }
+
+        return Result.Success(new BuscarContaResponse(contaEntity.Id, contaEntity.Agencia, contaEntity.Numero));
     }
 }
