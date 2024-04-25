@@ -1,9 +1,13 @@
+using Cepedi.Banco.Conta.Compartilhado.Enums;
+
 namespace Cepedi.Banco.Conta.Dominio.Entidades;
 public class ChavePixEntity
 {
     public int Id { get; set; }
-    public int IdConta { get; set; }
-    public required ContaEntity Conta { get; set; }
-    public int IdTipoChavePix { get; set; }
-    public required TipoChavePixEntity TipoChavePix { get; set; }
+    public required int IdConta { get; set; }
+    public required string Valor { get; set; }
+    public ContaEntity? Conta { get; set; }
+    public required ETipoPix IdTipoChavePix { get; set; }
+    public  TipoChavePixEntity? TipoChavePix { get; set; }
+
 }
