@@ -31,12 +31,11 @@ public class AtualizarChavePixRequestHandler :
         }
 
         chavePixEntity.IdConta = request.IdConta;
-        chavePixEntity.Nome = request.Nome;
         chavePixEntity.IdTipoChavePix = request.IdTipoChavePix;
 
         await _chavePixRepository.AtualizarChavePixAsync(chavePixEntity);
 
-        return Result.Success(new AtualizarChavePixResponse(chavePixEntity.Id, chavePixEntity.Nome, chavePixEntity.IdTipoChavePix.ToString()));
+        return Result.Success(new AtualizarChavePixResponse(chavePixEntity.Id, chavePixEntity.IdTipoChavePix.ToString()));
     }
 
 }

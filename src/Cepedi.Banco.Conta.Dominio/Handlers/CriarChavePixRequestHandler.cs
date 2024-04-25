@@ -24,10 +24,10 @@ namespace Cepedi.Banco.Conta.Dominio.Handlers;
 
     public async Task<Result<CriarChavePixResponse>> Handle(CriarChavePixRequest request, CancellationToken cancellationToken)
     {
-
         var ChavePix = new ChavePixEntity()
         {
             IdConta = request.IdConta,
+            Valor = request.Valor,
             IdTipoChavePix = request.IdTipoChavePix
         };
 

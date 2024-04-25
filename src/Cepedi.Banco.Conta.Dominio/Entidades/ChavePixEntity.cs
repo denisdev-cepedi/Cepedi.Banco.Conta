@@ -5,7 +5,7 @@ public class ChavePixEntity
 {
     public int Id { get; set; }
     public required int IdConta { get; set; }
-    public string Nome { get; set; }
+    public required string Valor { get; set; }
     public ContaEntity? Conta { get; set; }
     public required ETipoPix IdTipoChavePix { get; set; }
     public  TipoChavePixEntity? TipoChavePix { get; set; }
