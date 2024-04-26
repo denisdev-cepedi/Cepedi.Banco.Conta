@@ -36,4 +36,10 @@ public class ChavePixController : BaseController
     public async Task<ActionResult<AtualizarChavePixResponse>> AtualizarChavePixAsync(
         [FromBody] AtualizarChavePixRequest request) => await SendCommand(request);
 
+    [HttpGet]
+    [ProducesResponseType(typeof(BuscarChavePixPorContaResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ContaMensagemErrors), StatusCodes.Status400BadRequest)] //Talvez adicionar um responsetype para 404 seja válido
+    public async Task<ActionResult<BuscarChavePixPorContaResponse>> ObterChavePixPorContaAsync(
+        [FromQuery] BuscarChavePixPorContaRequest request) => await SendCommand(request);
+
 }
