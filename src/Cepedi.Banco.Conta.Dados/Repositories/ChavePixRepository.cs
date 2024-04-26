@@ -32,5 +32,10 @@ namespace Cepedi.Banco.Conta.Dados.Repositorios
         {
             return await _context.ChavePix.FirstOrDefaultAsync(cp => cp.Id == id);
         }
+
+        public async Task<ICollection<ChavePixEntity>> ObterChavePixPorContaAsync(int ContaId)
+        {
+            return await _context.ChavePix.Where(cp => cp.IdConta == ContaId).ToListAsync();
+        }
     }
 }
