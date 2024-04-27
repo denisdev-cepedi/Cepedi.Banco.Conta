@@ -1,4 +1,5 @@
-﻿using Cepedi.Banco.Conta.Compartilhado;
+﻿using Cepedi.Banco.Conta.Compartilhado.Requests;
+using Cepedi.Banco.Conta.Compartilhado.Responses;
 using Cepedi.Banco.Conta.Dominio.Entidades;
 using Cepedi.Banco.Conta.Dominio.Repositorio;
 using MediatR;

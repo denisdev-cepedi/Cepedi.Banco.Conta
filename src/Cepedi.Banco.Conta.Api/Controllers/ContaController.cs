@@ -1,6 +1,3 @@
-using Cepedi.Banco.Conta.Dominio;
-using Cepedi.Banco.Conta.Dominio.Repositorio;
-using Cepedi.Banco.Conta.Compartilhado.Excecoes;
 using Cepedi.Banco.Conta.Compartilhado.Requests;
 using Cepedi.Banco.Conta.Compartilhado.Responses;
 using MediatR;
@@ -29,12 +26,6 @@ public class ContaController : BaseController
     [ProducesResponseType(typeof(ContaMensagemErrors), StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<CriarContaResponse>> CriarContaAsync(
         [FromBody] CriarContaRequest request) => await SendCommand(request);
-
-    // [HttpPost]
-    // [ProducesResponseType(typeof(CriarContaResponse), StatusCodes.Status200OK)]
-    // [ProducesResponseType(typeof(ResponseErro), StatusCodes.Status400BadRequest)]
-    // public async Task<ActionResult<CriarContaResponse>> CriarContaAsync(
-    //     [FromBody] CriarContaRequest request) => await SendCommand(request);
 
 
     [HttpGet]
