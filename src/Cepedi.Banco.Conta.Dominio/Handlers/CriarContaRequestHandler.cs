@@ -27,7 +27,8 @@ public class CriarContaRequestHandler : IRequestHandler<CriarContaRequest, Resul
             Numero = request.Numero,
             Status = request.Status,
             LimiteTrasancao = request.LimiteTrasancao,
-            LimiteCredito = request.LimiteCredito
+            LimiteCredito = request.LimiteCredito,
+            Saldo = request.Saldo
         };
 
         _contaRepository.CriarContaAsync(conta);

@@ -37,11 +37,30 @@ namespace Cepedi.Banco.Conta.Dados.Repositorios
             return await _context.Transacao.FirstOrDefaultAsync(c => c.Id == id);
         }
 
+        public Task<List<TransacaoEntity>> ObterTransacoesPorContaAsync(int idConta)
+        {
+            var transacoes = _context.Transacao
+                .Where(t => t.IdContaOrigem == idConta || t.IdContaDestino == idConta)
+                .ToListAsync();
+
+            return transacoes;
+        }
+
         public Task<List<TransacaoEntity>> ObterTransacoesPorContaAsync(int idConta, DateTime dataInicio, DateTime dataFim)
         {            
             var transacoes = _context.Transacao
                 .Where(t => t.IdContaOrigem == idConta || t.IdContaDestino == idConta)
                 .Where(t => t.DataTransacao >= dataInicio && t.DataTransacao <= dataFim)
+                .ToListAsync();
+
+            return transacoes;
+        }
+
+        public Task<List<TransacaoEntity>> ObterTransacoesPorContaAsync(int idConta, int mes, int ano)
+        {
+            var transacoes = _context.Transacao
+                .Where(t => t.IdContaOrigem == idConta || t.IdContaDestino == idConta)
+                .Where(t => t.DataTransacao.Month == mes && t.DataTransacao.Year == ano)
                 .ToListAsync();
 
             return transacoes;

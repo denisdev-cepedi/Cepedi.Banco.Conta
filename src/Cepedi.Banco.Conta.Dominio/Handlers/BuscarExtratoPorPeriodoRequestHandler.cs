@@ -9,28 +9,31 @@ using OperationResult;
 
 namespace Cepedi.Banco.Conta.Dominio.Handlers;
 
-public class ExtratoContaRequestHandler
-    : IRequestHandler<ExtratoContaRequest, Result<ExtratoContaResponse>>
+public class BuscarExtratoPorPeriodoRequestHandler
+    : IRequestHandler<BuscarExtratoPorPeriodoRequest, Result<BuscarExtratoPorPeriodoResponse>>
 {
-    public readonly ILogger<ExtratoContaRequestHandler> _logger;
+    public readonly ILogger<BuscarExtratoPorPeriodoRequestHandler> _logger;
     public readonly IContaRepository _contaRepositorio;
     public readonly ITransacaoRepository _transacaoRepository;
 
-    public ExtratoContaRequestHandler(IContaRepository contaRepositorio, ITransacaoRepository transacaoRepository, ILogger<ExtratoContaRequestHandler> logger)
+    public BuscarExtratoPorPeriodoRequestHandler(
+        IContaRepository contaRepositorio, 
+        ITransacaoRepository transacaoRepository, 
+        ILogger<BuscarExtratoPorPeriodoRequestHandler> logger)
     {
         _contaRepositorio = contaRepositorio;
         _transacaoRepository = transacaoRepository;
         _logger = logger;
     }
 
-    public async Task<Result<ExtratoContaResponse>> Handle(ExtratoContaRequest request, CancellationToken cancellationToken)
+    public async Task<Result<BuscarExtratoPorPeriodoResponse>> Handle(BuscarExtratoPorPeriodoRequest request, CancellationToken cancellationToken)
     {
-        var conta = await _contaRepositorio.ObterContaPorIdAsync(request.IdConta);
+        var conta = await _contaRepositorio.ObterContaAsync(request.IdConta);
 
         if (conta == null)
         {
             _logger.LogError("Conta não encontrada ao tentar obter extrato");
-            return Result.Error<ExtratoContaResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
+            return Result.Error<BuscarExtratoPorPeriodoResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
                 (ContaMensagemErrors.SemResultados)));
         }
 
@@ -39,7 +42,7 @@ public class ExtratoContaRequestHandler
         var transacoesResponse = transacoes.Select(t => new BuscarTransacaoResponse(t.Id, t.IdContaOrigem, t.IdContaDestino, t.ValorTransacao, t.DataTransacao)).ToList();
         var saldo = conta.Saldo;
 
-        return Result.Success(new ExtratoContaResponse(conta.Id, request.DataInicio.ToString(), saldo, transacoesResponse));
-    }   
+        return Result.Success(new BuscarExtratoPorPeriodoResponse(conta.Id, DateTime.Now, saldo, transacoesResponse));
+    }
 
 }

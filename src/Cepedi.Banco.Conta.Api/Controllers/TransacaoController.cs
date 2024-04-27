@@ -30,6 +30,25 @@ public class TransacaoController : BaseController
     public async Task<ActionResult<CriarTransacaoResponse>> CriarTransacaoAsync(
         [FromBody] CriarTransacaoRequest request) => await SendCommand(request);
 
+    [HttpGet]
+    [ProducesResponseType(typeof(BuscarTransacaoResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<BuscarTransacaoResponse>> BuscarTransacaoAsync(
+        [FromQuery] BuscarTransacaoRequest request) => await SendCommand(request);
+
+    [HttpGet("periodo")]
+    [ProducesResponseType(typeof(BuscarExtratoPorPeriodoResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<BuscarExtratoPorPeriodoResponse>> BuscarExtratoPorPeriodoAsync(
+        [FromQuery] BuscarExtratoPorPeriodoRequest request) => await SendCommand(request);
+
+
+    [HttpGet("mes")]
+    [ProducesResponseType(typeof(BuscarExtratoPorMesResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<BuscarExtratoPorMesResponse>> BuscarExtratoPorMesAsync(
+        [FromQuery] BuscarExtratoPorMesRequest request) => await SendCommand(request);    
+
 /*     [HttpPut]
     [ProducesResponseType(typeof(AtualizarTransacaoResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
