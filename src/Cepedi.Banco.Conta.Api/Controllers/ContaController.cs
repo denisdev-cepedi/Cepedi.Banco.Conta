@@ -24,18 +24,24 @@ public class ContaController : BaseController
         _mediator = mediator;
     }
 
-    [HttpGet("{id_conta}/extrato")]
-    [ProducesResponseType(typeof(ExtratoContaResponse), StatusCodes.Status200OK)]
+    [HttpPost]
+    [ProducesResponseType(typeof(CriarContaResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ContaMensagemErrors), StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<ExtratoContaResponse>> ExtratoContaAsync(
-         [FromBody] ExtratoContaRequest request) => await SendCommand(request);
-
+    public async Task<ActionResult<CriarContaResponse>> CriarContaAsync(
+        [FromBody] CriarContaRequest request) => await SendCommand(request);
 
     // [HttpPost]
     // [ProducesResponseType(typeof(CriarContaResponse), StatusCodes.Status200OK)]
     // [ProducesResponseType(typeof(ResponseErro), StatusCodes.Status400BadRequest)]
     // public async Task<ActionResult<CriarContaResponse>> CriarContaAsync(
     //     [FromBody] CriarContaRequest request) => await SendCommand(request);
+
+
+    [HttpGet]
+    [ProducesResponseType(typeof(BuscarContaResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ContaMensagemErrors), StatusCodes.Status400BadRequest)] //Talvez adicionar um responsetype para 404 seja válido
+    public async Task<ActionResult<BuscarContaResponse>> ObterContaAsync(
+        [FromQuery] BuscarContaRequest request) => await SendCommand(request);
 
     // [HttpPut]
     // [ProducesResponseType(typeof(AtualizarContaResponse), StatusCodes.Status200OK)]

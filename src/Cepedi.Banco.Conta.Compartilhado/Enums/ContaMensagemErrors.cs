@@ -17,10 +17,10 @@ public class ContaMensagemErrors
         Tipo = ETipoErro.Alerta
     };
 
-    public static ResultadoErro ErroGravacaoUsuario = new()
+    public static ResultadoErro ErroGravacaoConta = new()
     {
         Titulo = "Ocorreu um erro na gravação",
-        Descricao = "Ocorreu um erro na gravação do usuário. Por favor tente novamente",
+        Descricao = "Ocorreu um erro na gravação da conta. Por favor tente novamente",
         Tipo = ETipoErro.Erro
     };
 
@@ -28,6 +28,13 @@ public class ContaMensagemErrors
     {
         Titulo = "Dados inválidos",
         Descricao = "Os dados enviados na requisição são inválidos",
+        Tipo = ETipoErro.Erro
+    };
+
+    public static ResultadoErro ErroGravacaoUsuario = new()
+    {
+        Titulo = "Ocorreu um erro na gravação",
+        Descricao = "Ocorreu um erro na gravação do usuario. Por favor tente novamente",
         Tipo = ETipoErro.Erro
     };
 }

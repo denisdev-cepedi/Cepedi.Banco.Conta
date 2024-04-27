@@ -52,13 +52,13 @@ public class ApplicationDbContextInitialiser
         var usuario = new UsuarioEntity { Nome = "Denis", Celular = "71992414041", CelularValidado = true, 
             Cpf = "1234567891", DataNascimento = DateTime.Now.AddYears(-31), Email = "denis.vieira@cepedi.org.br" };
 
-        var transacao1 = new TipoTransacaoEntity { Nome = "Debito" };
-        var transacao2 = new TipoTransacaoEntity { Nome = "Credito" };
-        var transacao3 = new TipoTransacaoEntity { Nome = "Transferencia" };
-        var chavePix1 = new TipoChavePixEntity { Nome = "CPF" };
-        var chavePix2 = new TipoChavePixEntity { Nome = "Email" };
-        var chavePix3 = new TipoChavePixEntity { Nome = "Telefone" };
-        var chavePix4 = new TipoChavePixEntity { Nome = "ChaveAleatoria" };
+        var transacao1 = new TipoTransacaoEntity { Id= ETipoTransacao.Debito, Nome = "Debito" };
+        var transacao2 = new TipoTransacaoEntity { Id= ETipoTransacao.Credito, Nome = "Credito" };
+        var transacao3 = new TipoTransacaoEntity { Id= ETipoTransacao.Transferencia, Nome = "Transferencia" };
+        var chavePix1 = new TipoChavePixEntity { Id= ETipoPix.CPF, Nome = "CPF" };
+        var chavePix2 = new TipoChavePixEntity { Id= ETipoPix.Email, Nome = "Email" };
+        var chavePix3 = new TipoChavePixEntity { Id= ETipoPix.Telefone, Nome = "Telefone" };
+        var chavePix4 = new TipoChavePixEntity { Id= ETipoPix.ChaveAleatoria, Nome = "ChaveAleatoria" };
 
         // Default data
         // Seed, if necessary
