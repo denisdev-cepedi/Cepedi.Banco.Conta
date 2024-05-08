@@ -1,4 +1,5 @@
-﻿using Cepedi.Banco.Conta.Compartilhado;
+﻿using Cepedi.Banco.Conta.Compartilhado.Requests;
+using Cepedi.Banco.Conta.Compartilhado.Responses;
 using Cepedi.Banco.Conta.Dominio.Entidades;
 using Cepedi.Banco.Conta.Dominio.Repositorio;
 using MediatR;
@@ -26,7 +27,8 @@ public class CriarContaRequestHandler : IRequestHandler<CriarContaRequest, Resul
             Numero = request.Numero,
             Status = request.Status,
             LimiteTrasancao = request.LimiteTrasancao,
-            LimiteCredito = request.LimiteCredito
+            LimiteCredito = request.LimiteCredito,
+            Saldo = request.Saldo
         };
 
         _contaRepository.CriarContaAsync(conta);

@@ -9,7 +9,7 @@ public class TransacaoEntity
     public required int IdContaDestino { get; set; }
     public  ContaEntity? ContaDestino { get; set; }
     public DateTime DataTransacao { get; set; }
-    public int ValorTransacao { get; set; }
+    public decimal ValorTransacao { get; set; }
     public TipoTransacaoEntity? TipoTransacao { get; set; }
     public required ETipoTransacao IdTipoTransacao { get; set; }
     
