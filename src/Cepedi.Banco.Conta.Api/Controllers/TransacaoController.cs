@@ -5,6 +5,7 @@ using Cepedi.Banco.Conta.Compartilhado.Requests;
 using Cepedi.Banco.Conta.Compartilhado.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Cepedi.Banco.Conta.Compartilhado;
 
 namespace Cepedi.Banco.Conta.Api.Controllers;
 
@@ -42,12 +43,18 @@ public class TransacaoController : BaseController
     public async Task<ActionResult<BuscarExtratoPorPeriodoResponse>> BuscarExtratoPorPeriodoAsync(
         [FromQuery] BuscarExtratoPorPeriodoRequest request) => await SendCommand(request);
 
-
     [HttpGet("mes")]
     [ProducesResponseType(typeof(BuscarExtratoPorMesResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<BuscarExtratoPorMesResponse>> BuscarExtratoPorMesAsync(
         [FromQuery] BuscarExtratoPorMesRequest request) => await SendCommand(request);    
+
+    [HttpGet("conta")]
+    [ProducesResponseType(typeof(BuscarTransacaoPorContaResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<BuscarTransacaoPorContaResponse>> ObterTransacoesPorContaAsync(
+        [FromQuery] BuscarTransacaoPorContaRequest request) => await SendCommand(request);
+
 
 /*     [HttpPut]
     [ProducesResponseType(typeof(AtualizarTransacaoResponse), StatusCodes.Status200OK)]
