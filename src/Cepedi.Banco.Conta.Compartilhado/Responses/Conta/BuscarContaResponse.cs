@@ -1,3 +1,5 @@
-﻿namespace Cepedi.Banco.Conta.Compartilhado.Responses;
+﻿using Cepedi.Banco.Conta.Compartilhado.Enums;
 
-public record BuscarContaResponse (int IdConta, string Agencia, string Numero); 
+namespace Cepedi.Banco.Conta.Compartilhado.Responses;
+
+public record BuscarContaResponse (int IdConta, string Agencia, string Numero, DateTime DataCriacao, EStatusConta Status, decimal LimiteTrasancao, decimal LimiteCredito, decimal Saldo); 
