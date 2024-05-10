@@ -33,6 +33,12 @@ public class ContaController : BaseController
     [ProducesResponseType(typeof(ContaMensagemErrors), StatusCodes.Status400BadRequest)] //Talvez adicionar um responsetype para 404 seja válido
     public async Task<ActionResult<BuscarContaResponse>> ObterContaAsync(
         [FromQuery] BuscarContaRequest request) => await SendCommand(request);
+    
+    [HttpGet("saldo")]
+    [ProducesResponseType(typeof(BuscarSaldoContaResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ContaMensagemErrors), StatusCodes.Status400BadRequest)] //Talvez adicionar um responsetype para 404 seja válido
+    public async Task<ActionResult<BuscarSaldoContaResponse>> ObterSaldoConta(
+        [FromQuery] BuscarSaldoContaRequest request) => await SendCommand(request);
 
     // [HttpPut]
     // [ProducesResponseType(typeof(AtualizarContaResponse), StatusCodes.Status200OK)]
