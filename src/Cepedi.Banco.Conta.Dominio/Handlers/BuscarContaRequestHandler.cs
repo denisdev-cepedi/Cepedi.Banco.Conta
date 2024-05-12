@@ -30,6 +30,6 @@ public class BuscarContaRequestHandler : IRequestHandler<BuscarContaRequest, Res
                 Compartilhado.Excecoes.SemResultadosExcecao());
         }
 
-        return Result.Success(new BuscarContaResponse(contaEntity.Id, contaEntity.Agencia, contaEntity.Numero));
+        return Result.Success(new BuscarContaResponse(contaEntity.Id, contaEntity.Agencia, contaEntity.Numero, contaEntity.DataCriacao, contaEntity.Status, contaEntity.LimiteTrasancao, contaEntity.LimiteCredito, contaEntity.Saldo));
     }
 }
