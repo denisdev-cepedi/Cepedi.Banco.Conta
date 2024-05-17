@@ -4,7 +4,7 @@ using MediatR;
 using OperationResult;
 
 namespace Cepedi.Banco.Conta.Compartilhado.Requests;
-public class CriarTransacaoRequest : IRequest<Result<CriarTransacaoResponse>>
+public class CriarTransacaoRequest : IRequest<Result<CriarTransacaoResponse>>, IValida
 {
     public int IdContaOrigem { get; set; } = default!;
     public int IdContaDestino { get; set; } = default!;
