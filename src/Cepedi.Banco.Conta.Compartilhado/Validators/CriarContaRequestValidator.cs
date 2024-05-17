@@ -2,7 +2,7 @@
 using Cepedi.Banco.Conta.Compartilhado.Requests;
 using FluentValidation;
 
-namespace Cepedi.Banco.Conta.Compartilhado.Valdators;
+namespace Cepedi.Banco.Conta.Compartilhado.Validators;
 
 public class CriarContaRequestValidator : AbstractValidator<CriarContaRequest>
 {
