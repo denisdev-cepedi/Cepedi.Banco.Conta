@@ -24,6 +24,6 @@ public class AtualizarChavePixRequestValidator : AbstractValidator<AtualizarChav
 
         RuleFor(x => x.IdTipoChavePix)
             .IsInEnum()
-            .WithMessage($"IdTipoChavePix deve ser um dos valores: {string.Join(", ", Enum.GetNames(typeof(ETipoPix)))}");
+            .WithMessage($"IdTipoChavePix deve ser um dos valores númericos: {string.Join(", ", Enum.GetValues<ETipoPix>().Cast<ETipoPix>().Select(x => $"{(int)x} - {x}"))}");
     }
 }

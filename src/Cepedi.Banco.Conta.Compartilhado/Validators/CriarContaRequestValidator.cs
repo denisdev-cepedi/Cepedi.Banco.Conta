@@ -26,8 +26,8 @@ public class CriarContaRequestValidator : AbstractValidator<CriarContaRequest>
 
         RuleFor(x => x.Status)
             .IsInEnum()
-            .WithMessage($"Status deve ser um dos valores: {string.Join(", ", Enum.GetNames(typeof(EStatusConta)))}");
-
+            .WithMessage($"Status deve ser um dos valores númericos: {string.Join(", ", Enum.GetValues<EStatusConta>().Cast<EStatusConta>().Select(x => $"{(int)x} - {x}"))}");
+            
         RuleFor(x => x.LimiteTrasancao)
             .GreaterThanOrEqualTo(0)
             .WithMessage("O Limite de Transação deve ser maior ou igual a zero.");

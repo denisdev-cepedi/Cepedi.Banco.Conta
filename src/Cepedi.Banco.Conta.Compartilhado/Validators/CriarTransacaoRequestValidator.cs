@@ -28,6 +28,6 @@ public class CriarTransacaoRequestValidator : AbstractValidator<CriarTransacaoRe
 
         RuleFor(x => x.IdTipoTransacao)
             .IsInEnum()
-            .WithMessage($"IdTipoTransacao deve ser um dos valores: {string.Join(", ", Enum.GetNames(typeof(ETipoTransacao)))}");
+            .WithMessage($"IdTipoTransacao deve ser um dos valores númericos: {string.Join(", ", Enum.GetValues<ETipoTransacao>().Cast<ETipoTransacao>().Select(x => $"{(int)x} - {x}"))}");
     }
 }
