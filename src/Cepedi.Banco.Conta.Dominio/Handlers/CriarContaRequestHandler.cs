@@ -1,4 +1,5 @@
-﻿using Cepedi.Banco.Conta.Compartilhado.Requests;
+﻿using Cepedi.Banco.Conta.Compartilhado.Enums;
+using Cepedi.Banco.Conta.Compartilhado.Requests;
 using Cepedi.Banco.Conta.Compartilhado.Responses;
 using Cepedi.Banco.Conta.Dominio.Entidades;
 using Cepedi.Banco.Conta.Dominio.Repositorio;
@@ -12,14 +13,34 @@ public class CriarContaRequestHandler : IRequestHandler<CriarContaRequest, Resul
 {
     private readonly ILogger<CriarContaRequestHandler> _logger;
     private readonly IContaRepository _contaRepository;
+    private readonly IUsuarioRepository _usuarioRepository;
 
-    public CriarContaRequestHandler(IContaRepository contaRepository, ILogger<CriarContaRequestHandler> logger)
+    public CriarContaRequestHandler(IContaRepository contaRepository, IUsuarioRepository usuarioRepository, ILogger<CriarContaRequestHandler> logger)
     {
         _contaRepository = contaRepository;
+        _usuarioRepository = usuarioRepository;
         _logger = logger;
     }
-    public Task<Result<CriarContaResponse>> Handle(CriarContaRequest request, CancellationToken cancellationToken)
+    public async Task<Result<CriarContaResponse>> Handle(CriarContaRequest request, CancellationToken cancellationToken)
     {
+
+        // verificar se a pessoa existe
+        var pessoaExistente = await _usuarioRepository.ObterUsuarioAsync(request.IdPessoa);
+
+        if (pessoaExistente == null)
+        {
+            return Result.Error<CriarContaResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
+                (ContaMensagemErrors.UsuarioNaoEncontrado)));
+        }
+
+        var contaExistente = await _contaRepository.ObterContaPorAgenciaNumeroAsync(request.Agencia, request.Numero);
+
+        if (contaExistente != null)
+        {
+            return Result.Error<CriarContaResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
+                (ContaMensagemErrors.ContaExistente)));
+        }
+
         var conta = new ContaEntity()
         {
             IdPessoa = request.IdPessoa,
@@ -31,7 +52,7 @@ public class CriarContaRequestHandler : IRequestHandler<CriarContaRequest, Resul
             Saldo = request.Saldo
         };
 
-        _contaRepository.CriarContaAsync(conta);
+        await _contaRepository.CriarContaAsync(conta);
 
         return Result.Success(new CriarContaResponse(conta.Id, conta.Agencia, conta.Numero));
     }
