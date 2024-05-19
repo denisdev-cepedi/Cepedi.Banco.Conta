@@ -29,7 +29,7 @@ namespace Cepedi.Banco.Conta.Dominio.Handlers;
 
         if (conta == null)
         {
-            return Result.Error<CriarChavePixResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao ((ContaMensagemErrors.SemResultados)));
+            return Result.Error<CriarChavePixResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao ((ContaMensagemErrors.ContaNaoExiste)));
         }
 
         var chavePix = new ChavePixEntity()
@@ -39,8 +39,8 @@ namespace Cepedi.Banco.Conta.Dominio.Handlers;
             IdTipoChavePix = request.IdTipoChavePix
         };
 
-        await _chavePixRepository.CriarChavePixAsync(chavePix);
+        var chavePixEntity = await _chavePixRepository.CriarChavePixAsync(chavePix);
 
-        return Result.Success(new CriarChavePixResponse(chavePix.Id));
+        return Result.Success(new CriarChavePixResponse(chavePixEntity.Id));
     }
 }
