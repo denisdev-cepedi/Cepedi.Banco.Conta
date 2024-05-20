@@ -47,4 +47,17 @@ public class ContaController : BaseController
     public async Task<ActionResult<AtualizarContaResponse>> AtualizarContaAsync(
         [FromBody] AtualizarContaRequest request) => await SendCommand(request);
 
+    [HttpPut("deposito")]
+    [ProducesResponseType(typeof(FazerDepositoContaResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ContaMensagemErrors), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ContaMensagemErrors), StatusCodes.Status204NoContent)]
+    public async Task<ActionResult<FazerDepositoContaResponse>> AtualizarContaAsync(
+        [FromBody] FazerDepositoContaRequest request) => await SendCommand(request);
+
+    [HttpPut("saque")]
+    [ProducesResponseType(typeof(FazerSaqueContaResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ContaMensagemErrors), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ContaMensagemErrors), StatusCodes.Status204NoContent)]
+    public async Task<ActionResult<FazerSaqueContaResponse>> AtualizarContaAsync(
+        [FromBody] FazerSaqueContaRequest request) => await SendCommand(request);
 }
