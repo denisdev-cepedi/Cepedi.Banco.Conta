@@ -37,4 +37,10 @@ public class ContaMensagemErrors
         Descricao = "Ocorreu um erro na gravação do usuario. Por favor tente novamente",
         Tipo = ETipoErro.Erro
     };
+    public static ResultadoErro ContaNaoExiste = new()
+    {
+        Titulo = "Conta não encontrada",
+        Descricao = "A conta informada não foi encontrada",
+        Tipo = ETipoErro.Erro
+    };
 }

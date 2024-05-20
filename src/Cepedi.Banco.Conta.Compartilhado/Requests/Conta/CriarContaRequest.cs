@@ -5,7 +5,7 @@ using OperationResult;
 
 namespace Cepedi.Banco.Conta.Compartilhado.Requests;
 
-public class CriarContaRequest : IRequest<Result<CriarContaResponse>>
+public class CriarContaRequest : IRequest<Result<CriarContaResponse>>, IValida
 {
     public int IdPessoa { get; set; }
     public required string Agencia { get; set; }
