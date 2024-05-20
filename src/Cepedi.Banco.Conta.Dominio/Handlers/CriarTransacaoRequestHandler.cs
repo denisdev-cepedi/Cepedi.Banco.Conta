@@ -28,10 +28,37 @@ namespace Cepedi.Banco.Conta.Dominio.Handlers;
         var contaOrigem = await _contaRepository.ObterContaAsync(request.IdContaOrigem);
         var contaDestino = await _contaRepository.ObterContaAsync(request.IdContaDestino);
 
+
         if(contaOrigem == null || contaDestino == null){
             return Result.Error<CriarTransacaoResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
             (ContaMensagemErrors.DadosInvalidos)));
-        } 
+        }
+
+        if((int)contaOrigem.Status != 1 || (int)contaDestino.Status != 1){
+            return Result.Error<CriarTransacaoResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
+            (ContaMensagemErrors.ErroStatusConta)));
+        }
+
+        if(contaOrigem.Saldo < request.ValorTransacao){
+            return Result.Error<CriarTransacaoResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
+            (ContaMensagemErrors.ErroTransacaoSaldo)));
+        }
+
+        if(contaOrigem.LimiteTrasancao < request.ValorTransacao){
+            return Result.Error<CriarTransacaoResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
+            (ContaMensagemErrors.ErroTransacaoLimiteTransacao)));
+        }
+
+        if(contaDestino.LimiteCredito < request.ValorTransacao){
+            return Result.Error<CriarTransacaoResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
+            (ContaMensagemErrors.ErroTransacaoLimiteCredito)));
+        }
+
+        contaOrigem.Saldo -= request.ValorTransacao;
+        contaDestino.Saldo += request.ValorTransacao;
+        await _contaRepository.AtualizarContaAsync(contaOrigem);
+        await _contaRepository.AtualizarContaAsync(contaDestino);
+
         var transacao = new TransacaoEntity()
         {
             IdContaOrigem = request.IdContaOrigem,
