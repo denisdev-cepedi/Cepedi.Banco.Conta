@@ -51,4 +51,11 @@ public class ContaMensagemErrors
         Descricao = "Não foi possível encontrar o usuário informado para a criação da conta",
         Tipo = ETipoErro.Alerta
     };
+          
+    public static ResultadoErro ContaNaoExiste = new()
+    {
+        Titulo = "Conta não encontrada",
+        Descricao = "A conta informada não foi encontrada",
+        Tipo = ETipoErro.Erro
+    };
 }

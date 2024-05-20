@@ -4,7 +4,7 @@ using MediatR;
 using OperationResult;
 
 namespace Cepedi.Banco.Conta.Compartilhado.Requests;
-public class CriarChavePixRequest : IRequest<Result<CriarChavePixResponse>>
+public class CriarChavePixRequest : IRequest<Result<CriarChavePixResponse>>, IValida
 {
     public int IdConta { get; set; } = default!;
     public ETipoPix IdTipoChavePix { get; set; }
