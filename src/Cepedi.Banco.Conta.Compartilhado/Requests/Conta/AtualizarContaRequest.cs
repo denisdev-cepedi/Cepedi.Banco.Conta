@@ -5,11 +5,10 @@ using OperationResult;
 
 namespace Cepedi.Banco.Conta.Compartilhado.Requests;
 
-public class AtualizarChavePixRequest : IRequest<Result<AtualizarChavePixResponse>>, IValida
+public class AtualizarContaRequest  : IRequest<Result<AtualizarContaResponse>>, IValida
 {
-    public int IdChavePix { get; set; }
     public int IdConta { get; set; }
-    public string Valor { get; set; } = default!;
-    public ETipoPix IdTipoChavePix { get; set; }
-
+    public EStatusConta Status { get; set; }
+    public decimal LimiteTrasancao { get; set; }
+    public decimal LimiteCredito { get; set; }
 }

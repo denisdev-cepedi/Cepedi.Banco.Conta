@@ -35,5 +35,10 @@ namespace Cepedi.Banco.Conta.Dados.Repositorios
         {
             return await _context.Conta.FirstOrDefaultAsync(c => c.Id == id);
         }
+
+        public async Task<ContaEntity> ObterContaPorAgenciaNumeroAsync(string agencia, string numero)
+        {
+            return await _context.Conta.FirstOrDefaultAsync(c => c.Agencia == agencia && c.Numero == numero);
+        }
     }
 }

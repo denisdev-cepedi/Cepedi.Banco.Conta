@@ -40,11 +40,11 @@ public class ContaController : BaseController
     public async Task<ActionResult<BuscarSaldoContaResponse>> ObterSaldoConta(
         [FromQuery] BuscarSaldoContaRequest request) => await SendCommand(request);
 
-    // [HttpPut]
-    // [ProducesResponseType(typeof(AtualizarContaResponse), StatusCodes.Status200OK)]
-    // [ProducesResponseType(typeof(ResponseErro), StatusCodes.Status400BadRequest)]
-    // [ProducesResponseType(typeof(ResponseErro), StatusCodes.Status204NoContent)]
-    // public async Task<ActionResult<AtualizarContaResponse>> AtualizarContaAsync(
-    //     [FromBody] AtualizarContaRequest request) => await SendCommand(request);
+    [HttpPut]
+    [ProducesResponseType(typeof(AtualizarContaResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ContaMensagemErrors), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ContaMensagemErrors), StatusCodes.Status204NoContent)]
+    public async Task<ActionResult<AtualizarContaResponse>> AtualizarContaAsync(
+        [FromBody] AtualizarContaRequest request) => await SendCommand(request);
 
 }

@@ -66,4 +66,24 @@ public class ContaMensagemErrors
         Tipo = ETipoErro.Erro
     };
 
+    public static ResultadoErro ContaExistente = new()
+    {
+        Titulo = "Conta já existente",
+        Descricao = "Já existe uma conta com o mesmo número e agência",
+        Tipo = ETipoErro.Alerta
+    };
+
+    public static ResultadoErro UsuarioNaoEncontrado = new()
+    {
+        Titulo = "Usuário não encontrado",
+        Descricao = "Não foi possível encontrar o usuário informado para a criação da conta",
+        Tipo = ETipoErro.Alerta
+    };
+          
+    public static ResultadoErro ContaNaoExiste = new()
+    {
+        Titulo = "Conta não encontrada",
+        Descricao = "A conta informada não foi encontrada",
+        Tipo = ETipoErro.Erro
+    };
 }
