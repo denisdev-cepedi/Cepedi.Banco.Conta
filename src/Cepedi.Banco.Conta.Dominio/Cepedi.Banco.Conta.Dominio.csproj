@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <Folder Include="Notifications\" />
-    <Folder Include="Repositorio\Queries\" />
   </ItemGroup>
 
   <ItemGroup>

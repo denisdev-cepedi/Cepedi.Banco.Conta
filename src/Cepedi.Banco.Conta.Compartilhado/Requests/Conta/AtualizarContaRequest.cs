@@ -5,7 +5,7 @@ using OperationResult;
 
 namespace Cepedi.Banco.Conta.Compartilhado.Requests;
 
-public class AtualizarContaRequest  : IRequest<Result<AtualizarContaResponse>>, IValida
+public class AtualizarContaRequest  : IRequest<Result<AtualizarContaResponse>>
 {
     public int IdConta { get; set; }
     public EStatusConta Status { get; set; }
