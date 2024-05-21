@@ -86,4 +86,32 @@ public class ContaMensagemErrors
         Descricao = "A conta informada não foi encontrada",
         Tipo = ETipoErro.Erro
     };
+
+    public static ResultadoErro ErroDeposito = new()
+    {
+        Titulo = "Deposito ultrapassa limite",
+        Descricao = "O valor do depósito ultrapassaria o limite de crédito da conta",
+        Tipo = ETipoErro.Erro
+    };
+
+    public static ResultadoErro ErroSaque = new()
+    {
+        Titulo = "Saque ultrapassa o saldo da conta",
+        Descricao = "O valor do depósito ultrapassaria saldo atual da conta",
+        Tipo = ETipoErro.Erro
+    };
+
+    public static ResultadoErro ErroValorNegativo = new()
+    {
+        Titulo = "Valor inserido é negativo",
+        Descricao = "Os valores inseridos não devem ser negativos",
+        Tipo = ETipoErro.Erro
+    };
+
+    public static ResultadoErro ErroValorNegativoOuNulo = new()
+    {
+        Titulo = "Valor inserido é negativo ou nulo",
+        Descricao = "Os valores inseridos não devem ser negativos nem nulos",
+        Tipo = ETipoErro.Erro
+    };
 }

@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 using OperationResult;
 
 namespace Cepedi.Banco.Conta.Dominio.Handlers;
- public class CriarTransacaoRequestHandler 
+public class CriarTransacaoRequestHandler 
     : IRequestHandler<CriarTransacaoRequest, Result<CriarTransacaoResponse>>
 {
     private readonly ILogger<CriarTransacaoRequestHandler> _logger;
@@ -31,27 +31,32 @@ namespace Cepedi.Banco.Conta.Dominio.Handlers;
 
         if(contaOrigem == null || contaDestino == null){
             return Result.Error<CriarTransacaoResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
-            (ContaMensagemErrors.DadosInvalidos)));
+            ContaMensagemErrors.DadosInvalidos));
         }
 
-        if((int)contaOrigem.Status != 1 || (int)contaDestino.Status != 1){
+        if(StatusNaoAtivo(contaOrigem.Status, contaDestino.Status)){
             return Result.Error<CriarTransacaoResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
-            (ContaMensagemErrors.ErroStatusConta)));
+            ContaMensagemErrors.ErroStatusConta));
         }
 
-        if(contaOrigem.Saldo < request.ValorTransacao){
+        if(TransacaoMaiorQueSaldo(request.ValorTransacao, contaOrigem.Saldo)){
             return Result.Error<CriarTransacaoResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
-            (ContaMensagemErrors.ErroTransacaoSaldo)));
+            ContaMensagemErrors.ErroTransacaoSaldo));
         }
 
-        if(contaOrigem.LimiteTrasancao < request.ValorTransacao){
+        if(TransacaoMaiorQueLimiteTransacao(request.ValorTransacao, contaOrigem.LimiteTrasancao)){
             return Result.Error<CriarTransacaoResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
-            (ContaMensagemErrors.ErroTransacaoLimiteTransacao)));
+            ContaMensagemErrors.ErroTransacaoLimiteTransacao));
         }
 
-        if(contaDestino.LimiteCredito < request.ValorTransacao){
+        if(TransacaoMaiorQueLimiteCredito(request.ValorTransacao, contaDestino.Saldo, contaDestino.LimiteCredito)){
             return Result.Error<CriarTransacaoResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
-            (ContaMensagemErrors.ErroTransacaoLimiteCredito)));
+            ContaMensagemErrors.ErroTransacaoLimiteCredito));
+        }
+
+        if(TransacaoValorNegativoOuNulo(request.ValorTransacao)){
+            return Result.Error<CriarTransacaoResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
+            ContaMensagemErrors.ErroValorNegativoOuNulo));
         }
 
         contaOrigem.Saldo -= request.ValorTransacao;
@@ -72,4 +77,40 @@ namespace Cepedi.Banco.Conta.Dominio.Handlers;
 
         return Result.Success(new CriarTransacaoResponse(transacao.Id, transacao.DataTransacao.ToString(), transacao.ValorTransacao ));
     }
+
+    private bool StatusNaoAtivo(EStatusConta statusOrigem, EStatusConta statusDestino){ 
+        if((int)statusOrigem != 1 || (int)statusDestino != 1)
+            return true;
+
+        return false;
+    }
+
+    private bool TransacaoMaiorQueSaldo(decimal valorTransacao, decimal saldo){ 
+        if(valorTransacao > saldo)
+            return true;
+
+        return false;
+    }
+
+    private bool TransacaoMaiorQueLimiteTransacao(decimal valorTransacao, decimal limiteTransacao){ 
+        if(valorTransacao < limiteTransacao)
+            return true;
+
+        return false;
+    }
+
+    private bool TransacaoMaiorQueLimiteCredito(decimal valorTransacao, decimal saldoDestino, decimal limiteCredito){ 
+        if(valorTransacao + saldoDestino > limiteCredito)
+            return true;
+
+        return false;
+    }
+
+    private bool TransacaoValorNegativoOuNulo(decimal valorTransacao){
+        if(valorTransacao <= 0)
+            return true;
+
+        return false;
+    }
 }
+
