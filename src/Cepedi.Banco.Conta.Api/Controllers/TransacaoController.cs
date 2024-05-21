@@ -55,6 +55,12 @@ public class TransacaoController : BaseController
     public async Task<ActionResult<BuscarTransacaoPorContaResponse>> ObterTransacoesPorContaAsync(
         [FromQuery] BuscarTransacaoPorContaRequest request) => await SendCommand(request);
 
+    [HttpGet("recentes")]
+    [ProducesResponseType(typeof(BuscarTransacoesRecentesResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ResultadoErro), StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<BuscarTransacoesRecentesResponse>> BuscarTransacoesRecentesAsync(
+        [FromQuery] BuscarTransacoesRecentesRequest request) => await SendCommand(request);
+
 
 /*     [HttpPut]
     [ProducesResponseType(typeof(AtualizarTransacaoResponse), StatusCodes.Status200OK)]
