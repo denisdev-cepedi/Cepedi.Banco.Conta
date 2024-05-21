@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Cepedi.Banco.Conta.Dominio\Cepedi.Banco.Conta.Dominio.csproj" />
+    <ProjectReference Include="..\Cepedi.Banco.Conta.Dominio\Cepedi.Banco.Conta.Dominio.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 using Cepedi.Banco.Conta.Dominio.Services;
 using Microsoft.Extensions.Caching.Distributed;
 
-namespace Cepedi.BancoCentral.Conta.Cache;
+namespace Cepedi.Banco.Conta.Cache;
 
 public class Cache<T> : ICache<T>
 {

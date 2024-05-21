@@ -3,5 +3,5 @@
 namespace Cepedi.Banco.Conta.Dominio.Repositorio.Queries;
 public interface IPessoaQueryRepository
 {
-    Task<List<PessoaEntity>> ObterPessoasAsync(string nome);
+    Task<List<ContaEntity>> ObterPessoasAsync(string nome);
 }

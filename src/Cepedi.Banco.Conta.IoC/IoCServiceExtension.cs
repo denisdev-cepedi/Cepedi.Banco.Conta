@@ -1,4 +1,5 @@
-﻿using Cepedi.Banco.Conta.Compartilhado;
+﻿using System.Diagnostics.CodeAnalysis;
+using Cepedi.Banco.Conta.Compartilhado;
 using Cepedi.Banco.Conta.Dados;
 using Cepedi.Banco.Conta.Cache;
 using Cepedi.Banco.Conta.Dados.Repositorios;
@@ -7,6 +8,7 @@ using Cepedi.Banco.Conta.Dominio.Handlers.Pipelines;
 using Cepedi.Banco.Conta.Dominio.Repositorio;
 using Cepedi.Banco.Conta.Dominio.Repositorio.Queries;
 using Cepedi.Banco.Conta.Dominio.Services;
+using Cepedi.
 using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

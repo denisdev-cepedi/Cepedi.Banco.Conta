@@ -22,7 +22,7 @@
     <ProjectReference Include="..\Cepedi.Banco.Conta.Compartilhado\Cepedi.Banco.Conta.Compartilhado.csproj" />
     <ProjectReference Include="..\Cepedi.Banco.Conta.Dados\Cepedi.Banco.Conta.Dados.csproj" />
     <ProjectReference Include="..\Cepedi.Banco.Conta.Dominio\Cepedi.Banco.Conta.Dominio.csproj" />
-    <ProjectReference Include="..\..\Cepedi.Banco.Conta.Cache\Cepedi.Banco.Conta.Cache.csproj" />
+    <ProjectReference Include="..\Cepedi.Banco.Conta.Cache\Cepedi.Banco.Conta.Cache.csproj" />
   </ItemGroup>
 
 </Project>
