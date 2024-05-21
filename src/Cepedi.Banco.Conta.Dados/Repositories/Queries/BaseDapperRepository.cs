@@ -27,6 +27,18 @@ public abstract class BaseDapperRepository
         return result.ToList();
     }
 
+    public virtual async Task<T> ExecuteQueryFirstOrDefaultAsync<T>(string query, DynamicParameters parameters)
+    {
+        using var conn = GetConnection();
+        conn.Open();
+
+        var result = await conn.QueryFirstOrDefaultAsync<T>(query, parameters);
+
+        conn.Close();
+
+        return result!;
+    }
+
     private IDbConnection GetConnection()
     {
         var sqlConnect = new SqlConnection(_connectionString);

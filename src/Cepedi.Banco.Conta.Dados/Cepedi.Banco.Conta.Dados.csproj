@@ -20,10 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Cepedi.Banco.Conta.Dominio\Cepedi.Banco.Conta.Dominio.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Repositories\Queries\" />
+    <ProjectReference Include="..\Cepedi.Banco.Conta.Cache\Cepedi.Banco.Conta.Cache.csproj" />
   </ItemGroup>
 
 </Project>

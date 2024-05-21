@@ -1,8 +1,10 @@
 ﻿using Cepedi.Banco.Conta.Cache;
 using Cepedi.Banco.Conta.Compartilhado;
 using Cepedi.Banco.Conta.Dados;
+using Cepedi.Banco.Conta.Dados.Repositories.Queries;
 using Cepedi.Banco.Conta.Dados.Repositorios;
 using Cepedi.Banco.Conta.Dominio.Handlers.Pipelines;
+using Cepedi.Banco.Conta.Dominio.Queries;
 using Cepedi.Banco.Conta.Dominio.Repositorio;
 using Cepedi.Banco.Conta.Dominio.Servicos;
 using FluentValidation;
@@ -32,7 +34,7 @@ namespace Cepedi.Banco.Conta.IoC
             services.AddScoped<IChavePixRepository, ChavePixRepository>();
             //services.AddHttpContextAccessor();
 
-            //services.AddScoped<IPessoaQueryRepository, PessoaQueryRepository>();
+            services.AddScoped<ITransacaoQueryRepository, TransacaoQueryRepository>();
 
             // Cache Redis
             services.AddStackExchangeRedisCache(obj =>
