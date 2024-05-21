@@ -107,4 +107,11 @@ public class ContaMensagemErrors
         Descricao = "Os valores inseridos não devem ser negativos",
         Tipo = ETipoErro.Erro
     };
+
+    public static ResultadoErro ErroValorNegativoOuNulo = new()
+    {
+        Titulo = "Valor inserido é negativo ou nulo",
+        Descricao = "Os valores inseridos não devem ser negativos nem nulos",
+        Tipo = ETipoErro.Erro
+    };
 }

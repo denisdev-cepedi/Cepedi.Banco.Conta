@@ -26,21 +26,18 @@ public class FazerSaqueContaRequestHandler : IRequestHandler<FazerSaqueContaRequ
     {
         var contaEntity = await _contaRepository.ObterContaAsync(request.IdConta);
 
-         if (contaEntity == null)
-        {
+        if (contaEntity == null){
             return Result.Error<FazerSaqueContaResponse>(new
                 Compartilhado.Excecoes.SemResultadosExcecao());
         }
 
-        if (request.ValorSaque < 0)
-        {
+        if(SaqueValorNegativoOuNulo(request.ValorSaque)){
             return Result.Error<FazerSaqueContaResponse>(new
                 Compartilhado.Excecoes.ExcecaoAplicacao(
                 ContaMensagemErrors.ErroValorNegativo));
         }
 
-        if (contaEntity.Saldo < request.ValorSaque)
-        {
+        if(SaqueMaiorQueSaldo(request.ValorSaque, contaEntity.Saldo) ){
             return Result.Error<FazerSaqueContaResponse>(new
                 Compartilhado.Excecoes.ExcecaoAplicacao(
                 ContaMensagemErrors.ErroSaque));
@@ -48,6 +45,22 @@ public class FazerSaqueContaRequestHandler : IRequestHandler<FazerSaqueContaRequ
 
         contaEntity.Saldo -= request.ValorSaque;
 
+        await _contaRepository.AtualizarContaAsync(contaEntity);
+
         return Result.Success(new FazerSaqueContaResponse(contaEntity.Id, contaEntity.Agencia, contaEntity.Numero, contaEntity.Saldo));
+    }
+
+    private bool SaqueValorNegativoOuNulo(decimal valorSaque){
+        if(valorSaque <= 0)
+            return true;
+
+        return false;
+    }
+
+    private bool SaqueMaiorQueSaldo(decimal valorSaque, decimal saldo){ 
+        if(valorSaque > saldo)
+            return true;
+
+        return false;
     }
 }

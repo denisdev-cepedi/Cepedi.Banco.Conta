@@ -26,21 +26,18 @@ public class FazerDepositoContaRequestHandler : IRequestHandler<FazerDepositoCon
     {
         var contaEntity = await _contaRepository.ObterContaAsync(request.IdConta);
 
-        if (contaEntity == null)
-        {
+        if (contaEntity == null){
             return Result.Error<FazerDepositoContaResponse>(new
                 Compartilhado.Excecoes.SemResultadosExcecao());
         }
 
-        if (request.ValorDeposito < 0)
-        {
+        if(DepositoValorNegativoOuNulo(request.ValorDeposito)){
             return Result.Error<FazerDepositoContaResponse>(new
                 Compartilhado.Excecoes.ExcecaoAplicacao(
-                ContaMensagemErrors.ErroValorNegativo));
+                ContaMensagemErrors.ErroValorNegativoOuNulo));
         }
 
-        if (contaEntity.LimiteCredito < contaEntity.Saldo + request.ValorDeposito)
-        {
+        if(DepositoMaiorQueLimiteCredito(request.ValorDeposito, contaEntity.Saldo, contaEntity.LimiteCredito)){
             return Result.Error<FazerDepositoContaResponse>(new
                 Compartilhado.Excecoes.ExcecaoAplicacao(
                 ContaMensagemErrors.ErroDeposito));
@@ -48,6 +45,22 @@ public class FazerDepositoContaRequestHandler : IRequestHandler<FazerDepositoCon
 
         contaEntity.Saldo += request.ValorDeposito;
 
+        await _contaRepository.AtualizarContaAsync(contaEntity);
+
         return Result.Success(new FazerDepositoContaResponse(contaEntity.Id, contaEntity.Agencia, contaEntity.Numero, contaEntity.Saldo));
+    }
+
+    private bool DepositoValorNegativoOuNulo(decimal valorDeposito){
+        if(valorDeposito <= 0)
+            return true;
+
+        return false;
+    }
+
+    private bool DepositoMaiorQueLimiteCredito(decimal valorDeposito, decimal saldo, decimal limiteCredito){ 
+        if(valorDeposito + saldo > limiteCredito)
+            return true;
+
+        return false;
     }
 }
