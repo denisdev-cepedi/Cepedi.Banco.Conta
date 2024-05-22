@@ -44,12 +44,14 @@ public class CriarTransacaoRequestHandler
             ContaMensagemErrors.ErroTransacaoSaldo));
         }
 
-        if(TransacaoMaiorQueLimiteTransacao(request.ValorTransacao, contaOrigem.LimiteTrasancao)){
+        if(request.IdTipoTransacao == ETipoTransacao.Transferencia 
+        && TransacaoMaiorQueLimiteTransacao(request.ValorTransacao, contaOrigem.LimiteTrasancao)){
             return Result.Error<CriarTransacaoResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
             ContaMensagemErrors.ErroTransacaoLimiteTransacao));
         }
 
-/*         if(TransacaoMaiorQueLimiteCredito(request.ValorTransacao, contaDestino.Saldo, contaDestino.LimiteCredito)){
+        if(request.IdTipoTransacao == ETipoTransacao.Credito 
+        && TransacaoMaiorQueLimiteTransacao(request.ValorTransacao, contaOrigem.LimiteCredito)){
             return Result.Error<CriarTransacaoResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
             ContaMensagemErrors.ErroTransacaoLimiteCredito));
         } */
@@ -94,13 +96,6 @@ public class CriarTransacaoRequestHandler
 
     private bool TransacaoMaiorQueLimiteTransacao(decimal valorTransacao, decimal limiteTransacao){ 
         if(valorTransacao > limiteTransacao)
-            return true;
-
-        return false;
-    }
-
-    private bool TransacaoMaiorQueLimiteCredito(decimal valorTransacao, decimal saldoDestino, decimal limiteCredito){ 
-        if(valorTransacao + saldoDestino > limiteCredito)
             return true;
 
         return false;

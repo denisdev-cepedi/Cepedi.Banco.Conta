@@ -35,7 +35,9 @@ namespace Cepedi.Banco.Conta.Dados.Repositorios
 
         public async Task<ICollection<ChavePixEntity>> ObterChavePixPorContaAsync(int ContaId)
         {
-            return await _context.ChavePix.Where(cp => cp.IdConta == ContaId).ToListAsync();
+            return await _context.ChavePix.Where(cp => cp.IdConta == ContaId)
+            .Include(cp => cp.TipoChavePix)
+            .ToListAsync();
         }
     }
 }
