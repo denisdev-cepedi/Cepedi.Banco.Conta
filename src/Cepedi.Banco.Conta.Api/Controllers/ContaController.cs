@@ -3,6 +3,7 @@ using Cepedi.Banco.Conta.Compartilhado.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Cepedi.Banco.Conta.Compartilhado.Enums;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Cepedi.Banco.Conta.Api.Controllers;
 
@@ -41,6 +42,7 @@ public class ContaController : BaseController
         [FromQuery] BuscarSaldoContaRequest request) => await SendCommand(request);
 
     [HttpPut]
+    [Authorize]
     [ProducesResponseType(typeof(AtualizarContaResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ContaMensagemErrors), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ContaMensagemErrors), StatusCodes.Status204NoContent)]
