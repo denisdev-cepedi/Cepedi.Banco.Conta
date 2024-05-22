@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Cepedi.Banco.ChavePix.Api.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("v1/chavespix")]
 public class ChavePixController : BaseController
 {
     private readonly ILogger<ChavePixController> _logger;

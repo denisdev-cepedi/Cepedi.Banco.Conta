@@ -7,7 +7,7 @@ using Cepedi.Banco.Conta.Compartilhado.Enums;
 namespace Cepedi.Banco.Conta.Api.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("v1/contas")]
 public class ContaController : BaseController
 {
     private readonly ILogger<ContaController> _logger;
