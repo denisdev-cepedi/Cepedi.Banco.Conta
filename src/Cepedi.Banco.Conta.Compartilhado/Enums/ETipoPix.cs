@@ -2,7 +2,8 @@ namespace Cepedi.Banco.Conta.Compartilhado.Enums;
 public enum ETipoPix
 {
     CPF = 1,
-    Email = 2,
-    Telefone = 3,
-    ChaveAleatoria = 4
+    CNPJ = 2,
+    Email = 3,
+    Telefone = 4,
+    ChaveAleatoria = 5
 }

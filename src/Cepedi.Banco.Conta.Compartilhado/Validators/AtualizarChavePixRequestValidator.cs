@@ -1,4 +1,5 @@
-﻿using Cepedi.Banco.Conta.Compartilhado.Enums;
+﻿using Cepedi.Banco.Conta.Compartilhado.Utils;
+using Cepedi.Banco.Conta.Compartilhado.Enums;
 using Cepedi.Banco.Conta.Compartilhado.Requests;
 using FluentValidation;
 
@@ -20,7 +21,17 @@ public class AtualizarChavePixRequestValidator : AbstractValidator<AtualizarChav
             .NotEmpty()
             .WithMessage("Valor é obrigatório.")
             .MaximumLength(77)
-            .WithMessage("Valor deve ter no máximo 77 caracteres.");
+            .WithMessage("Valor deve ter no máximo 77 caracteres.")
+            .Must((request, valor) => request.IdTipoChavePix switch
+                {
+                    ETipoPix.CPF => RegexUtils.CpfRegex.IsMatch(valor),
+                    ETipoPix.CNPJ => RegexUtils.CnpjRegex.IsMatch(valor),
+                    ETipoPix.Telefone => RegexUtils.TelefoneRegex.IsMatch(valor),
+                    ETipoPix.Email => RegexUtils.EmailRegex.IsMatch(valor),
+                    ETipoPix.ChaveAleatoria => RegexUtils.ChaveAleatoriaRegex.IsMatch(valor),
+                    _ => false
+                })
+            .WithMessage("Valor não corresponde ao tipo de chave PIX especificado.");
 
         RuleFor(x => x.IdTipoChavePix)
             .IsInEnum()
