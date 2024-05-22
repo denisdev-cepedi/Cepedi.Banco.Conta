@@ -22,6 +22,7 @@ public class BuscarContaRequestHandler : IRequestHandler<BuscarContaRequest, Res
     }
     public async Task<Result<BuscarContaResponse>> Handle(BuscarContaRequest request, CancellationToken cancellationToken)
     {
+        _logger.LogError("Chamando handler de obter conta");
         var contaEntity = await _contaRepository.ObterContaAsync(request.IdPessoa);
 
         if (contaEntity == null)

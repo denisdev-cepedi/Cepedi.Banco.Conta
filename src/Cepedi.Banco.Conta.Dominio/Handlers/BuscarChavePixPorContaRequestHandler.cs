@@ -22,6 +22,7 @@ public class BuscarChavePixPorContaRequestHandler : IRequestHandler<BuscarChaveP
     }
     public async Task<Result<BuscarChavePixPorContaResponse>> Handle(BuscarChavePixPorContaRequest request, CancellationToken cancellationToken)
     {
+        _logger.LogError("Chamando handler de obter conta");
         var chavesPixes = await _chavePixRepository.ObterChavePixPorContaAsync(request.IdConta);
 
         var listaChavePixInfo = chavesPixes.Select(chave => new ChavePixInfo
