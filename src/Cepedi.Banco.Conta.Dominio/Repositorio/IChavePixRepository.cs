@@ -9,5 +9,6 @@ namespace Cepedi.Banco.Conta.Dominio.Repositorio
         Task<ChavePixEntity> ObterChavePixAsync(int id);
         Task<ICollection<ChavePixEntity>> ObterChavePixPorContaAsync(int ContaId);
         Task<ChavePixEntity> AtualizarChavePixAsync(ChavePixEntity chavePix);
+        Task<ChavePixEntity> RemoverChavePixAsync(ChavePixEntity chavePix);
     }
 }

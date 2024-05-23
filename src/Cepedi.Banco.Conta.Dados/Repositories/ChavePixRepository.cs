@@ -37,5 +37,12 @@ namespace Cepedi.Banco.Conta.Dados.Repositorios
         {
             return await _context.ChavePix.Where(cp => cp.IdConta == ContaId).ToListAsync();
         }
+
+        public async Task<ChavePixEntity> RemoverChavePixAsync(ChavePixEntity chavePix)
+        {
+            _context.ChavePix.Remove(chavePix);
+            await _context.SaveChangesAsync();
+            return chavePix;
+        }
     }
 }

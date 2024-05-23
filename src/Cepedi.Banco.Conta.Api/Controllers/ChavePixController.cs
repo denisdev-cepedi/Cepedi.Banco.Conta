@@ -42,4 +42,10 @@ public class ChavePixController : BaseController
     public async Task<ActionResult<BuscarChavePixPorContaResponse>> ObterChavePixPorContaAsync(
         [FromQuery] BuscarChavePixPorContaRequest request) => await SendCommand(request);
 
+    [HttpDelete]
+    [ProducesResponseType(typeof(RemoverChavePixResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ContaMensagemErrors), StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<RemoverChavePixResponse>> RemoverChavePixAsync(
+        [FromBody] RemoverChavePixRequest request) => await SendCommand(request);
+
 }
