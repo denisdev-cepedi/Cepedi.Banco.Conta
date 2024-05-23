@@ -11,10 +11,12 @@ public class AtualizarContaRequestHandler : IRequestHandler<AtualizarContaReques
 {
     private readonly ILogger<AtualizarContaRequestHandler> _logger;
     private readonly IContaRepository _contaRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public AtualizarContaRequestHandler(IContaRepository contaRepository, ILogger<AtualizarContaRequestHandler> logger)
+    public AtualizarContaRequestHandler(IContaRepository contaRepository, IUnitOfWork unitOfWork, ILogger<AtualizarContaRequestHandler> logger)
     {
         _contaRepository = contaRepository;
+        _unitOfWork = unitOfWork;
         _logger = logger;
     }
     public async Task<Result<AtualizarContaResponse>> Handle(AtualizarContaRequest request, CancellationToken cancellationToken)
@@ -32,6 +34,8 @@ public class AtualizarContaRequestHandler : IRequestHandler<AtualizarContaReques
         contaExistente.LimiteCredito = request.LimiteCredito;
 
         await _contaRepository.AtualizarContaAsync(contaExistente);
+
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
 
         return Result.Success(new AtualizarContaResponse(contaExistente.Id, contaExistente.Status, contaExistente.LimiteTrasancao, contaExistente.LimiteCredito));
     }

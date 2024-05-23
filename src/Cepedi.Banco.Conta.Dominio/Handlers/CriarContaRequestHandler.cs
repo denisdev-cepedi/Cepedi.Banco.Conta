@@ -14,11 +14,17 @@ public class CriarContaRequestHandler : IRequestHandler<CriarContaRequest, Resul
     private readonly ILogger<CriarContaRequestHandler> _logger;
     private readonly IContaRepository _contaRepository;
     private readonly IUsuarioRepository _usuarioRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public CriarContaRequestHandler(IContaRepository contaRepository, IUsuarioRepository usuarioRepository, ILogger<CriarContaRequestHandler> logger)
+    public CriarContaRequestHandler(
+        IContaRepository contaRepository, 
+        IUsuarioRepository usuarioRepository, 
+        IUnitOfWork unitOfWork, 
+        ILogger<CriarContaRequestHandler> logger)
     {
         _contaRepository = contaRepository;
         _usuarioRepository = usuarioRepository;
+        _unitOfWork = unitOfWork;
         _logger = logger;
     }
     public async Task<Result<CriarContaResponse>> Handle(CriarContaRequest request, CancellationToken cancellationToken)
@@ -52,6 +58,8 @@ public class CriarContaRequestHandler : IRequestHandler<CriarContaRequest, Resul
         };
 
         await _contaRepository.CriarContaAsync(conta);
+
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
 
         return Result.Success(new CriarContaResponse(conta.Id, conta.Agencia, conta.Numero));
     }
