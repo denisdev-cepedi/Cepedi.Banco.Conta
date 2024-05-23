@@ -31,7 +31,7 @@ public class AtualizarChavePixRequestValidator : AbstractValidator<AtualizarChav
                     ETipoPix.ChaveAleatoria => RegexUtils.ChaveAleatoriaRegex.IsMatch(valor),
                     _ => false
                 })
-            .WithMessage("Valor não corresponde ao tipo de chave PIX especificado.");
+            .WithMessage(request => $"Valor não corresponde ao tipo de chave PIX: {Enum.GetName<ETipoPix>(request.IdTipoChavePix)}");
 
         RuleFor(x => x.IdTipoChavePix)
             .IsInEnum()

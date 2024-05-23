@@ -4,7 +4,7 @@ using OperationResult;
 
 namespace Cepedi.Banco.Conta.Compartilhado.Requests;
 
-public class BuscarExtratoPorMesRequest : IRequest<Result<BuscarExtratoPorMesResponse>>
+public class BuscarExtratoPorMesRequest : IRequest<Result<BuscarExtratoPorMesResponse>>, IValida
 {
     public int IdConta { get; set; }
     public int Mes { get; set; }
