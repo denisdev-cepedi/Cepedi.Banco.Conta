@@ -10,7 +10,7 @@ using Cepedi.Banco.Conta.Compartilhado;
 namespace Cepedi.Banco.Conta.Api.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("v1/transacoes")]
 public class TransacaoController : BaseController
 {
     private readonly ILogger<TransacaoController> _logger;

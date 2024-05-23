@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Cepedi.Banco.Conta.Api.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("v1/usuarios")]
 public class UserController : BaseController
 {
     private readonly ILogger<UserController> _logger;
