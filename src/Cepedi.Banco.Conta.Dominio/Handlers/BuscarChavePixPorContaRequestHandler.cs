@@ -26,9 +26,10 @@ public class BuscarChavePixPorContaRequestHandler : IRequestHandler<BuscarChaveP
 
         var listaChavePixInfo = chavesPixes.Select(chave => new ChavePixInfo
         {
+            Id = chave.Id,
             Valor = chave.Valor,
-            Tipo = chave.TipoChavePix?.Nome
+            Tipo = chave.IdTipoChavePix.ToString(),
         }).ToList();
-        return Result.Success(new BuscarChavePixPorContaResponse(listaChavePixInfo));
+        return Result.Success(new BuscarChavePixPorContaResponse(request.IdConta, listaChavePixInfo));
     }
 }
