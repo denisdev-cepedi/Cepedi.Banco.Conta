@@ -6,5 +6,5 @@ namespace Cepedi.Banco.Conta.Compartilhado.Requests;
 
 public class BuscarContaRequest : IRequest<Result<BuscarContaResponse>>
 {
-    public int IdPessoa { get; set; }
+    public int IdConta { get; set; }
 }

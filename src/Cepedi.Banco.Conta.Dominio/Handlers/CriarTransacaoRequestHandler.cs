@@ -54,7 +54,7 @@ public class CriarTransacaoRequestHandler
         && TransacaoMaiorQueLimiteTransacao(request.ValorTransacao, contaOrigem.LimiteCredito)){
             return Result.Error<CriarTransacaoResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
             ContaMensagemErrors.ErroTransacaoLimiteCredito));
-        } */
+        }
 
         if(TransacaoValorNegativoOuNulo(request.ValorTransacao)){
             return Result.Error<CriarTransacaoResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(

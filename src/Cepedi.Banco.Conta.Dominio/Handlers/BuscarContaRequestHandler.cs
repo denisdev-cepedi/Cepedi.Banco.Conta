@@ -22,7 +22,7 @@ public class BuscarContaRequestHandler : IRequestHandler<BuscarContaRequest, Res
     }
     public async Task<Result<BuscarContaResponse>> Handle(BuscarContaRequest request, CancellationToken cancellationToken)
     {
-        var contaEntity = await _contaRepository.ObterContaAsync(request.IdPessoa);
+        var contaEntity = await _contaRepository.ObterContaAsync(request.IdConta);
 
         if (contaEntity == null)
         {
