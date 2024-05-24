@@ -22,6 +22,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "07 - Itens", "07 - Itens", 
 		.editorconfig = .editorconfig
 		.gitignore = .gitignore
 		README.md = README.md
+		API Documentation #reference.postman_collection.json = API Documentation #reference.postman_collection.json
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cepedi.Banco.Conta.Api", "src\Cepedi.Banco.Conta.Api\Cepedi.Banco.Conta.Api.csproj", "{2EF7BF02-E680-49BE-9FD5-19BF1E9D9A8E}"
