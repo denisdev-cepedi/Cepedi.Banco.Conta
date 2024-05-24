@@ -20,14 +20,12 @@ namespace Cepedi.Banco.Conta.Dados.Repositorios
         public async Task<ContaEntity> CriarContaAsync(ContaEntity conta)
         {
             _context.Conta.Add(conta);
-            await _context.SaveChangesAsync();
             return conta;
         }
 
         public async Task<ContaEntity> AtualizarContaAsync(ContaEntity conta)
         {
             _context.Conta.Update(conta);
-            await _context.SaveChangesAsync();
             return conta;
         }
 

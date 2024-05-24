@@ -26,6 +26,7 @@ namespace Cepedi.Banco.Conta.IoC
             services.AddScoped<IContaRepository, ContaRepository>();
             services.AddScoped<ITransacaoRepository, TransacaoRepository>();
             services.AddScoped<IChavePixRepository, ChavePixRepository>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
             //services.AddHttpContextAccessor();
 
             services.AddHealthChecks()
