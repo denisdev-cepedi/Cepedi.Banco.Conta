@@ -22,7 +22,7 @@ public class BuscarContaRequestHandler : IRequestHandler<BuscarContaRequest, Res
     }
     public async Task<Result<BuscarContaResponse>> Handle(BuscarContaRequest request, CancellationToken cancellationToken)
     {
-        var contaEntity = await _contaRepository.ObterContaAsync(request.IdPessoa);
+        var contaEntity = await _contaRepository.ObterContaAsync(request.IdConta);
 
         if (contaEntity == null)
         {
@@ -30,6 +30,6 @@ public class BuscarContaRequestHandler : IRequestHandler<BuscarContaRequest, Res
                 Compartilhado.Excecoes.SemResultadosExcecao());
         }
 
-        return Result.Success(new BuscarContaResponse(contaEntity.Id, contaEntity.Agencia, contaEntity.Numero, contaEntity.DataCriacao, contaEntity.Status, contaEntity.LimiteTrasancao, contaEntity.LimiteCredito, contaEntity.Saldo));
+        return Result.Success(new BuscarContaResponse(contaEntity.Id, contaEntity.IdPessoa, contaEntity.Agencia, contaEntity.Numero, contaEntity.DataCriacao, contaEntity.Status, contaEntity.LimiteTrasancao, contaEntity.LimiteCredito, contaEntity.Saldo));
     }
 }

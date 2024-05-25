@@ -34,7 +34,7 @@ public class BuscarExtratoPorMesRequestHandler
         {
             _logger.LogError("Conta não encontrada ao tentar obter extrato");
             return Result.Error<BuscarExtratoPorMesResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
-                (ContaMensagemErrors.SemResultados)));
+                (ContaMensagemErrors.ContaNaoExiste)));
         }
 
         List<TransacaoEntity> transacoes = await _transacaoRepository.ObterTransacoesPorContaAsync(request.IdConta, request.Mes, request.Ano);
