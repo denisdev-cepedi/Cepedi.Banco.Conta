@@ -25,14 +25,15 @@ public class BuscarSaldoContaRequestHandler
     }
     public async Task<Result<BuscarSaldoContaResponse>> Handle(BuscarSaldoContaRequest request, CancellationToken cancellationToken)
     {
-        var contaEntity = await _contaRepository.ObterContaAsync(request.IdPessoa);
+        var contaEntity = await _contaRepository.ObterContaAsync(request.IdConta);
 
         if (contaEntity == null)
         {
+            _logger.LogError("Conta não encontrada");
             return Result.Error<BuscarSaldoContaResponse>(new
                 Compartilhado.Excecoes.SemResultadosExcecao());
         }
 
-        return Result.Success(new BuscarSaldoContaResponse(contaEntity.Id, contaEntity.Agencia, contaEntity.Numero, contaEntity.Saldo));
+        return Result.Success(new BuscarSaldoContaResponse(contaEntity.Id, contaEntity.Agencia, contaEntity.Numero, contaEntity.Saldo));  
     }
 }

@@ -34,7 +34,7 @@ public class BuscarExtratoPorPeriodoRequestHandler
         {
             _logger.LogError("Conta não encontrada ao tentar obter extrato");
             return Result.Error<BuscarExtratoPorPeriodoResponse>(new Compartilhado.Excecoes.ExcecaoAplicacao(
-                (ContaMensagemErrors.SemResultados)));
+                (ContaMensagemErrors.ContaNaoExiste)));
         }
 
         List<TransacaoEntity> transacoes = await _transacaoRepository.ObterTransacoesPorContaAsync(request.IdConta, request.DataInicio, request.DataFim);

@@ -10,8 +10,8 @@ public class ContaEntityTypeConfiguration : IEntityTypeConfiguration<ContaEntity
         builder.ToTable("Conta");
         builder.HasKey(c => c.Id);
 
-        builder.Property(c => c.Agencia).IsRequired().IsFixedLength().HasMaxLength(5);
-        builder.Property(c => c.Numero).IsRequired().IsFixedLength().HasMaxLength(7);
+        builder.Property(c => c.Agencia).IsRequired().IsFixedLength().HasMaxLength(4);
+        builder.Property(c => c.Numero).IsRequired().IsFixedLength().HasMaxLength(6);
         builder.Property(c => c.IdPessoa).IsRequired();
         builder.Property(c => c.DataCriacao).IsRequired();
         builder.Property(c => c.Status).IsRequired();
